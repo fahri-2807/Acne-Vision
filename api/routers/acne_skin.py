@@ -36,6 +36,21 @@ logger = logging.getLogger(__name__)
 CNN_MODEL_PATH      = os.getenv("CNN_MODEL_PATH",      "../output/best_model.keras")
 SKINCARE_MODEL_PATH = os.getenv("SKINCARE_MODEL_PATH", "../output/skincare_cnn_integrated.pkl")
 
+# ---------- INFO MODEL  ----------
+print("MODEL PATH:", CNN_MODEL_PATH)
+if os.path.exists(CNN_MODEL_PATH):
+    print("MODEL SIZE:", os.path.getsize(CNN_MODEL_PATH), "bytes")
+else:
+    print("MODEL NOT FOUND")
+
+print("MODEL PATH:", SKINCARE_MODEL_PATH)
+if os.path.exists(SKINCARE_MODEL_PATH):
+    print("MODEL SIZE:", os.path.getsize(SKINCARE_MODEL_PATH), "bytes")
+else:
+    print("MODEL NOT FOUND")
+
+# --------------------------------------------
+
 IMG_SIZE      = (224, 224)
 ALLOWED_TYPES = {"image/jpeg", "image/png", "image/jpg"}
 MAX_FILE_SIZE = 10 * 1024 * 1024   # 10 MB

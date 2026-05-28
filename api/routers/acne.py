@@ -40,6 +40,13 @@ CLASS_DESC    = {
 MAX_FILE_SIZE = 10 * 1024 * 1024
 ALLOWED_TYPES = {"image/jpeg", "image/png", "image/jpg"}
 
+# ---------------- INFO MODEL CNN ----------------
+print("MODEL PATH:", MODEL_PATH)
+if os.path.exists(MODEL_PATH):
+    print("MODEL SIZE:", os.path.getsize(MODEL_PATH), "bytes")
+else:
+    print("MODEL NOT FOUND")
+
 # ─────────────────────────────────────────────
 # LOAD MODEL
 # ─────────────────────────────────────────────
