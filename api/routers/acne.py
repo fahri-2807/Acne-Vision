@@ -31,13 +31,18 @@ logger = logging.getLogger(__name__)
 import os
 from tensorflow.keras.models import load_model # pyright: ignore[reportMissingModuleSource]
 
-# Mendapatkan jalur direktori utama (root) proyek
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 1. Cari lokasi file main.py saat ini (ada di /app/api/)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Gabungkan dengan folder output tempat best_model.keras berada
+# 2. Naik satu tingkat ke folder utama (/app/)
+BASE_DIR = os.path.dirname(CURRENT_DIR)
+
+# 3. Gabungkan dengan folder output yang benar
 MODEL_PATH = os.path.join(BASE_DIR, "output", "best_model.keras")
 
-# Contoh saat melakukan load model di dalam blok try-except Anda
+print(f"JALUR MODEL YANG BENAR: {MODEL_PATH}")
+
+# Contoh pemuatan model keras
 try:
     model = load_model(MODEL_PATH)
     acne_cnn_model_status = True

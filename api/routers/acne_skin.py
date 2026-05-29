@@ -35,20 +35,28 @@ logger = logging.getLogger(__name__)
 # KONFIGURASI
 # ─────────────────────────────────────────────   
 # Mendapatkan jalur direktori utama (root) proyek
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 1. Cari lokasi file main.py saat ini (ada di /app/api/)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Gabungkan dengan folder output tempat best_model.keras berada
+# 2. Naik satu tingkat ke folder utama (/app/)
+BASE_DIR = os.path.dirname(CURRENT_DIR)
+
+# 3. Gabungkan dengan folder output yang benar
 CNN_MODEL_PATH = os.path.join(BASE_DIR, "output", "best_model.keras")
+SKINCARE_MODEL_PATH = os.path.join(BASE_DIR, "output", "skincare_cnn_integrated.pkl")
 
-# Contoh saat melakukan load model di dalam blok try-except Anda
+print(f"JALUR MODEL YANG BENAR: {CNN_MODEL_PATH}")
+print(f"JALUR PKL YANG BENAR: {SKINCARE_MODEL_PATH}")
+
+# Contoh pemuatan model keras
 try:
-    model = load_model(CNN_MODEL_PATH, compile=False)
+    model = load_model(CNN_MODEL_PATH)
     acne_cnn_model_status = True
 except Exception as e:
     print(f"Gagal memuat model: {e}")
     acne_cnn_model_status = False
 
-SKINCARE_MODEL_PATH = os.path.join(BASE_DIR, "output", "skincare_cnn_integrated.pkl")
+
 
 # ---------- INFO MODEL  ----------
 print("MODEL PATH:", CNN_MODEL_PATH)
