@@ -1,0 +1,11 @@
+fastapi==0.110.0
+uvicorn==0.27.0
+pydantic==2.6.4
+tensorflow==2.15.0
+numpy==1.26.4
+pillow==10.2.0
+python-multipart
+pillow
+numpy
+scikit-learn
+pandas
