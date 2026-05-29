@@ -25,7 +25,8 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────
 # KONFIGURASI
 # ─────────────────────────────────────────────
-SKINCARE_MODEL_PATH = os.getenv("SKINCARE_MODEL_PATH", "../output/skincare_cnn_integrated.pkl")
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+SKINCARE_MODEL_PATH = BASE_DIR / "output" / "skincare_cnn_integrated.pkl"
 
 # Bobot scoring
 WEIGHTS = {

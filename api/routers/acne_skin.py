@@ -32,9 +32,11 @@ logger = logging.getLogger(__name__)
 
 # ─────────────────────────────────────────────
 # KONFIGURASI
-# ─────────────────────────────────────────────
-CNN_MODEL_PATH      = os.getenv("CNN_MODEL_PATH",      "../output/best_model.keras")
-SKINCARE_MODEL_PATH = os.getenv("SKINCARE_MODEL_PATH", "../output/skincare_cnn_integrated.pkl")
+# ─────────────────────────────────────────────   
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+CNN_MODEL_PATH = BASE_DIR / "output" / "best_model.keras"
+SKINCARE_MODEL_PATH = BASE_DIR / "output" / "skincare_cnn_integrated.pkl"
 
 # ---------- INFO MODEL  ----------
 print("MODEL PATH:", CNN_MODEL_PATH)
