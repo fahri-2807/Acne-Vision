@@ -28,9 +28,7 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────
 # KONFIGURASI
 # ─────────────────────────────────────────────
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-MODEL_PATH = BASE_DIR / "output" / "best_model.keras"
+MODEL_PATH = "../output/best_model.keras"
 IMG_SIZE      = (224, 224)
 CLASS_NAMES   = ['Level 0', 'Level 1', 'Level 2', 'Level 3']
 CLASS_DESC    = {
