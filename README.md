@@ -14,9 +14,9 @@ Aplikasi Deep Learning untuk mendeteksi jenis dan tingkat keparahan jerawat.
 # 📋 Dokumentasi API — Acne Level Detection & Skincare Recommendation
 
 **Versi:** 2.0.0  
-**Base URL:** `https://web-production-e014.up.railway.app`  
+**Base URL:** `127.0.0.1:8000`  
 **Python:** 3.10.9 | **Framework:** FastAPI 0.104.1  
-**Dokumentasi interaktif:** `https://web-production-e014.up.railway.app/docs`
+**Dokumentasi interaktif:** `127.0.0.1:8000/docs`
 
 ---
 
@@ -96,7 +96,7 @@ uvicorn main:app --reload --port 8000
 ### 3. Verifikasi server berjalan
 
 ```bash
-curl https://web-production-e014.up.railway.app/
+curl 127.0.0.1:8000/
 ```
 
 Response yang diharapkan:
@@ -146,7 +146,7 @@ const formData = new FormData();
 formData.append("file", fotoWajah); // File object dari input[type=file]
 
 const response = await fetch(
-  "https://web-production-e014.up.railway.app/acne/analyze?jenis_kulit=Berminyak&top_n=5",
+  "127.0.0.1:8000/acne/analyze?jenis_kulit=Berminyak&top_n=5",
   {
     method: "POST",
     body: formData,
@@ -163,7 +163,7 @@ import requests
 
 with open('foto_wajah.jpg', 'rb') as f:
     response = requests.post(
-        'https://web-production-e014.up.railway.app/acne/analyze',
+        '127.0.0.1:8000/acne/analyze',
         files={'file': ('foto.jpg', f, 'image/jpeg')},
         params={'jenis_kulit': 'Berminyak', 'top_n': 5}
     )
@@ -174,7 +174,7 @@ data = response.json()
 #### Contoh request — curl
 
 ```bash
-curl -X POST "https://web-production-e014.up.railway.app/acne/analyze?jenis_kulit=Berminyak&top_n=5" \
+curl -X POST "127.0.0.1:8000/acne/analyze?jenis_kulit=Berminyak&top_n=5" \
      -F "file=@foto_wajah.jpg"
 ```
 
@@ -274,7 +274,7 @@ formData.append("files", foto2);
 formData.append("files", foto3);
 
 const response = await fetch(
-  "https://web-production-e014.up.railway.app/acne/analyze/batch?jenis_kulit=Kering&top_n=3",
+  "127.0.0.1:8000/acne/analyze/batch?jenis_kulit=Kering&top_n=3",
   { method: "POST", body: formData },
 );
 const data = await response.json();
@@ -283,7 +283,7 @@ const data = await response.json();
 #### Contoh request — curl
 
 ```bash
-curl -X POST "https://web-production-e014.up.railway.app/acne/analyze/batch?jenis_kulit=Berminyak&top_n=3" \
+curl -X POST "127.0.0.1:8000/acne/analyze/batch?jenis_kulit=Berminyak&top_n=3" \
      -F "files=@foto1.jpg" \
      -F "files=@foto2.jpg"
 ```
@@ -314,7 +314,7 @@ curl -X POST "https://web-production-e014.up.railway.app/acne/analyze/batch?jeni
 Mengembalikan status kedua model dan daftar pilihan input yang valid.
 
 ```bash
-curl https://web-production-e014.up.railway.app/acne/info
+curl 127.0.0.1:8000/acne/info
 ```
 
 ```json
@@ -375,7 +375,7 @@ const formData = new FormData();
 formData.append("file", fotoWajah);
 
 const response = await fetch(
-  "https://web-production-e014.up.railway.app/acne/predict",
+  "127.0.0.1:8000/acne/predict",
   {
     method: "POST",
     body: formData,
@@ -410,7 +410,7 @@ const response = await fetch(
 Prediksi tingkat jerawat dari beberapa foto sekaligus.
 
 ```bash
-curl -X POST https://web-production-e014.up.railway.app/acne/predict/batch \
+curl -X POST 127.0.0.1:8000/acne/predict/batch \
      -F "files=@foto1.jpg" \
      -F "files=@foto2.jpg"
 ```
@@ -453,7 +453,7 @@ Rekomendasi produk skincare berdasarkan input manual (tanpa foto).
 
 ```javascript
 const response = await fetch(
-  "https://web-production-e014.up.railway.app/skincare/recommend",
+  "127.0.0.1:8000/skincare/recommend",
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -474,7 +474,7 @@ const data = await response.json();
 Daftar semua pilihan input valid.
 
 ```bash
-curl https://web-production-e014.up.railway.app/skincare/skin-types
+curl 127.0.0.1:8000/skincare/skin-types
 ```
 
 ```json
@@ -563,7 +563,7 @@ async function analyzeAcne() {
 
   try {
     const response = await fetch(
-      `https://web-production-e014.up.railway.app/acne/analyze?jenis_kulit=${jenisSkin}&top_n=5`,
+      `127.0.0.1:8000/acne/analyze?jenis_kulit=${jenisSkin}&top_n=5`,
       { method: "POST", body: formData },
     );
 
@@ -600,7 +600,7 @@ const analyzeAcne = async (file, jenisSkin = "Berminyak", topN = 5) => {
   formData.append("file", file);
 
   const { data } = await axios.post(
-    "https://web-production-e014.up.railway.app/acne/analyze",
+    "127.0.0.1:8000/acne/analyze",
     formData,
     {
       params: { jenis_kulit: jenisSkin, top_n: topN },
@@ -620,7 +620,7 @@ import requests
 def analyze_acne(image_path: str, jenis_kulit: str = "Berminyak", top_n: int = 5):
     with open(image_path, "rb") as f:
         response = requests.post(
-            "https://web-production-e014.up.railway.app/acne/analyze",
+            "127.0.0.1:8000/acne/analyze",
             files={"file": (image_path, f, "image/jpeg")},
             params={"jenis_kulit": jenis_kulit, "top_n": top_n}
         )
