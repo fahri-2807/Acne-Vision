@@ -3,9 +3,7 @@ title: Acne Vision
 emoji: 👁️
 colorFrom: blue
 colorTo: indigo
-sdk: Docker
-sdk_version: 1.35.0
-app_file: main.py
+sdk: docker
 pinned: false
 license: mit
 ---
