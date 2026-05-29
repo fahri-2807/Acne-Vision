@@ -28,7 +28,23 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────
 # KONFIGURASI
 # ─────────────────────────────────────────────
-MODEL_PATH = "../output/best_model.keras"
+import os
+from tensorflow.keras.models import load_model # pyright: ignore[reportMissingModuleSource]
+
+# Mendapatkan jalur direktori utama (root) proyek
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Gabungkan dengan folder output tempat best_model.keras berada
+MODEL_PATH = os.path.join(BASE_DIR, "output", "best_model.keras")
+
+# Contoh saat melakukan load model di dalam blok try-except Anda
+try:
+    model = load_model(MODEL_PATH)
+    acne_cnn_model_status = True
+except Exception as e:
+    print(f"Gagal memuat model: {e}")
+    acne_cnn_model_status = False
+    
 IMG_SIZE      = (224, 224)
 CLASS_NAMES   = ['Level 0', 'Level 1', 'Level 2', 'Level 3']
 CLASS_DESC    = {

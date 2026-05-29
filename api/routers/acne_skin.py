@@ -27,16 +27,28 @@ from pydantic import BaseModel
 import tensorflow as tf
 from PIL import Image
 from sklearn.metrics.pairwise import cosine_similarity
+from tensorflow.keras.models import load_model  # pyright: ignore[reportMissingModuleSource]
 
 logger = logging.getLogger(__name__)
 
 # ─────────────────────────────────────────────
 # KONFIGURASI
 # ─────────────────────────────────────────────   
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# Mendapatkan jalur direktori utama (root) proyek
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CNN_MODEL_PATH = "../output/best_model.keras"
-SKINCARE_MODEL_PATH = BASE_DIR / "output" / "skincare_cnn_integrated.pkl"
+# Gabungkan dengan folder output tempat best_model.keras berada
+CNN_MODEL_PATH = os.path.join(BASE_DIR, "output", "best_model.keras")
+
+# Contoh saat melakukan load model di dalam blok try-except Anda
+try:
+    model = load_model(CNN_MODEL_PATH, compile=False)
+    acne_cnn_model_status = True
+except Exception as e:
+    print(f"Gagal memuat model: {e}")
+    acne_cnn_model_status = False
+
+SKINCARE_MODEL_PATH = os.path.join(BASE_DIR, "output", "skincare_cnn_integrated.pkl")
 
 # ---------- INFO MODEL  ----------
 print("MODEL PATH:", CNN_MODEL_PATH)
