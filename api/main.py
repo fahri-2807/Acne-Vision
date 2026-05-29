@@ -19,7 +19,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import acne, skincare, acne_skin
+from api.routers import acne, skincare, acne_skin
 
 # ─────────────────────────────────────────────
 # LOGGING
