@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────   
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SKINCARE_MODEL_PATH = BASE_DIR / "output" / "skincare_cnn_integrated.pkl"
-CNN_MODEL_PATH = "../output/best_model.keras"
+CNN_MODEL_PATH = BASE_DIR / "output" / "best_model.keras"
 
 
 # ---------- INFO MODEL  ----------
