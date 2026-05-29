@@ -365,7 +365,7 @@ async def analyze(
 ):
 
     if cnn_model is None:
-        raise HTTPException(503, "Model CNN belum dimuat. Pastikan best_model.h5 tersedia.")
+        raise HTTPException(503, "Model CNN belum dimuat. Pastikan best_model.keras tersedia.")
     if skin_bundle is None:
         raise HTTPException(503, "Model skincare belum dimuat. Pastikan skincare_cnn_integrated.pkl tersedia.")
 

@@ -40,7 +40,7 @@ API ini menggabungkan dua model machine learning:
 
 | Model       | File                          | Fungsi                                                           |
 | ----------- | ----------------------------- | ---------------------------------------------------------------- |
-| CNN NNEW    | `best_model.h5`               | Mendeteksi tingkat keparahan jerawat dari foto wajah (level 0–3) |
+| CNN NNEW    | `best_model.keras`               | Mendeteksi tingkat keparahan jerawat dari foto wajah (level 0–3) |
 | Skincare ML | `skincare_cnn_integrated.pkl` | Merekomendasikan produk skincare berdasarkan level jerawat       |
 
 ### Alur utama
@@ -72,7 +72,7 @@ project/
 │       ├── acne.py          ← endpoint CNN standalone
 │       └── skincare.py      ← endpoint skincare standalone
 └── output/
-    ├── best_model.h5
+    ├── best_model.keras
     └── skincare_cnn_integrated.pkl
 ```
 
@@ -114,7 +114,7 @@ Response yang diharapkan:
 }
 ```
 
-> ⚠️ Pastikan model `best_model.h5` dan `skincare_cnn_integrated.pkl` tersedia agar endpoint utama berfungsi.
+> ⚠️ Pastikan model `best_model.keras` dan `skincare_cnn_integrated.pkl` tersedia agar endpoint utama berfungsi.
 
 ---
 
@@ -320,7 +320,7 @@ curl 127.0.0.1:8000/acne/info
 ```json
 {
   "cnn_loaded": true,
-  "cnn_path": "../output/best_model.h5",
+  "cnn_path": "../output/best_model.keras",
   "skincare_loaded": true,
   "skincare_path": "../output/skincare_cnn_integrated.pkl",
   "acne_levels": {
