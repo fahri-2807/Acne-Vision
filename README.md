@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📋 Dokumentasi API — Acne Level Detection & Skincare Recommendation
 
 **Versi:** 2.0.0  
@@ -637,3 +638,15 @@ for p in hasil['rekomendasi']:
 | `GET`  | `/skincare/skin-types` | Daftar pilihan input skincare          | Info       |
 | `GET`  | `/`                    | Info API umum                          | Monitoring |
 | `GET`  | `/docs`                | Swagger UI                             | Dev tools  |
+=======
+---
+title: Acne Vision
+emoji: 🐢
+colorFrom: pink
+colorTo: yellow
+sdk: docker
+pinned: false
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+>>>>>>> db0b8df749f4adf2ff047e5f969d100012f43f99
