@@ -1,4 +1,18 @@
-<<<<<<< HEAD
+---
+title: Acne Vision
+emoji: 👁️
+colorFrom: blue
+colorTo: indigo
+sdk: Docker
+sdk_version: 1.35.0
+app_file: main.py
+pinned: false
+license: mit
+---
+
+# AcneVision AI
+Aplikasi Deep Learning untuk mendeteksi jenis dan tingkat keparahan jerawat.
+
 # 📋 Dokumentasi API — Acne Level Detection & Skincare Recommendation
 
 **Versi:** 2.0.0  
