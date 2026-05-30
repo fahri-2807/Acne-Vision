@@ -64,6 +64,10 @@ ACNE_LEVEL_INFO = {
     0: {
         'label'             : 'Level 0 — Kulit Normal atau Sangat Ringan',
         'deskripsi'         : 'Kulit normal atau sangat ringan. Fokus pada maintenance, hidrasi, dan pencegahan.',
+        'penyebab'          : (
+            'Kulit dalam kondisi sehat. Tidak ada faktor penyebab jerawat yang signifikan. '
+            'Tetap jaga kebersihan wajah, hidrasi, dan pola makan sehat untuk mempertahankan kondisi ini.'
+        ),
         'skincare_levels'   : [0],
         'masalah_default'   : ['Dehidrasi', 'Kusam', 'Penuaan'],
         'bahan_rekomendasi' : ['Hyaluronic Acid', 'Ceramide', 'Bakuchiol'],
@@ -74,6 +78,12 @@ ACNE_LEVEL_INFO = {
     1: {
         'label'             : 'Level 1 — Jerawat Ringan',
         'deskripsi'         : 'Jerawat ringan. Perlu skincare rutin dengan bahan aktif ringan.',
+        'penyebab'          : (
+            'Penyebab umum jerawat ringan: (1) Produksi sebum berlebih akibat perubahan hormon ringan, '
+            '(2) Pori-pori tersumbat oleh sel kulit mati yang tidak terangkat sempurna, '
+            '(3) Penggunaan produk skincare atau makeup yang terlalu berat/komedogenik, '
+            '(4) Kurang menjaga kebersihan wajah secara rutin.'
+        ),
         'skincare_levels'   : [1],
         'masalah_default'   : ['Jerawat', 'Pori besar', 'Flek hitam'],
         'bahan_rekomendasi' : ['Niacinamide', 'Tea Tree', 'Salicylic Acid'],
@@ -84,6 +94,13 @@ ACNE_LEVEL_INFO = {
     2: {
         'label'             : 'Level 2 — Jerawat Sedang',
         'deskripsi'         : 'Masalah kulit sedang. Butuh bahan aktif yang lebih targeted dan konsisten.',
+        'penyebab'          : (
+            'Penyebab umum jerawat sedang: (1) Ketidakseimbangan hormon (androgen) yang memicu produksi sebum berlebih, '
+            '(2) Proliferasi bakteri Cutibacterium acnes (C. acnes) pada folikel rambut yang tersumbat, '
+            '(3) Stres yang meningkatkan kadar kortisol dan memperburuk inflamasi, '
+            '(4) Pola makan tinggi gula dan produk olahan susu, '
+            '(5) Kebiasaan menyentuh wajah atau penggunaan masker yang tidak bersih.'
+        ),
         'skincare_levels'   : [2],
         'masalah_default'   : ['Jerawat', 'Bekas jerawat', 'Iritasi'],
         'bahan_rekomendasi' : ['Niacinamide', 'Ceramide', 'Tea Tree', 'Salicylic Acid'],
@@ -94,6 +111,15 @@ ACNE_LEVEL_INFO = {
     3: {
         'label'             : 'Level 3 — Jerawat Berat',
         'deskripsi'         : 'Masalah kulit berat. Perlu skincare intensif. Disarankan konsultasi dokter kulit.',
+        'penyebab'          : (
+            'Penyebab utama jerawat berat: (1) Gangguan hormonal signifikan (hiperandrogenisme, PCOS, dll.) '
+            'yang menyebabkan hipersekresi sebum ekstrem, '
+            '(2) Infeksi bakteri C. acnes yang menyebar luas dan memicu reaksi inflamasi dalam (nodul/kista), '
+            '(3) Faktor genetik — riwayat keluarga dengan jerawat kistik, '
+            '(4) Stres kronis dan kurang tidur yang melemahkan imunitas kulit, '
+            '(5) Penggunaan obat-obatan tertentu (kortikosteroid, lithium, dll.), '
+            '(6) Disarankan untuk segera berkonsultasi dengan dokter kulit (dermatologis).'
+        ),
         'skincare_levels'   : [3],
         'masalah_default'   : ['Jerawat', 'Iritasi', 'Bekas jerawat'],
         'bahan_rekomendasi' : ['Ceramide', 'Niacinamide'],
@@ -156,6 +182,7 @@ class AcneDetectionResult(BaseModel):
     acne_level       : int
     acne_label       : str
     acne_deskripsi   : str
+    acne_penyebab    : str
     confidence       : float
     confidence_pct   : str
     probabilities    : dict   # {"Tingkat 0": 0.12, ...}
@@ -344,6 +371,7 @@ def build_response(filename: str, image_bytes: bytes,
             acne_level     = level,
             acne_label     = info["label"],
             acne_deskripsi = info["deskripsi"],
+            acne_penyebab  = info["penyebab"],
             confidence     = round(float(probs[level]), 4),
             confidence_pct = f"{probs[level]*100:.2f}%",
             probabilities  = {level_names[i]: round(float(p), 4) for i, p in enumerate(probs)},

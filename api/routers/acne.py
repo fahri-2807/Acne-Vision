@@ -46,6 +46,34 @@ CLASS_DESC    = {
     'Level 2': 'Jerawat sedang',
     'Level 3': 'Jerawat berat',
 }
+CLASS_CAUSES  = {
+    'Level 0': (
+        'Kulit dalam kondisi sehat. Tidak ada faktor penyebab jerawat yang signifikan. '
+        'Tetap jaga kebersihan wajah, hidrasi, dan pola makan sehat untuk mempertahankan kondisi ini.'
+    ),
+    'Level 1': (
+        'Penyebab umum jerawat ringan: (1) Produksi sebum berlebih akibat perubahan hormon ringan, '
+        '(2) Pori-pori tersumbat oleh sel kulit mati yang tidak terangkat sempurna, '
+        '(3) Penggunaan produk skincare atau makeup yang terlalu berat/komedogenik, '
+        '(4) Kurang menjaga kebersihan wajah secara rutin.'
+    ),
+    'Level 2': (
+        'Penyebab umum jerawat sedang: (1) Ketidakseimbangan hormon (androgen) yang memicu produksi sebum berlebih, '
+        '(2) Proliferasi bakteri Cutibacterium acnes (C. acnes) pada folikel rambut yang tersumbat, '
+        '(3) Stres yang meningkatkan kadar kortisol dan memperburuk inflamasi, '
+        '(4) Pola makan tinggi gula dan produk olahan susu, '
+        '(5) Kebiasaan menyentuh wajah atau penggunaan masker yang tidak bersih.'
+    ),
+    'Level 3': (
+        'Penyebab utama jerawat berat: (1) Gangguan hormonal signifikan (hiperandrogenisme, PCOS, dll.) '
+        'yang menyebabkan hipersekresi sebum ekstrem, '
+        '(2) Infeksi bakteri C. acnes yang menyebar luas dan memicu reaksi inflamasi dalam (nodul/kista), '
+        '(3) Faktor genetik — riwayat keluarga dengan jerawat kistik, '
+        '(4) Stres kronis dan kurang tidur yang melemahkan imunitas kulit, '
+        '(5) Penggunaan obat-obatan tertentu (kortikosteroid, lithium, dll.), '
+        '(6) Disarankan untuk segera berkonsultasi dengan dokter kulit (dermatologis).'
+    ),
+}
 MAX_FILE_SIZE = 10 * 1024 * 1024
 ALLOWED_TYPES = {"image/jpeg", "image/png", "image/jpg"}
 
@@ -91,6 +119,7 @@ class PredictionResult(BaseModel):
     confidence        : float
     confidence_pct    : str
     description       : str
+    penyebab          : str
     probabilities     : dict
     inference_time_ms : float
 
@@ -184,6 +213,7 @@ async def predict(file: UploadFile = File(..., description="File gambar (JPEG/PN
         confidence        = round(float(probs[idx]), 4),
         confidence_pct    = f"{probs[idx]*100:.2f}%",
         description       = CLASS_DESC[CLASS_NAMES[idx]],
+        penyebab          = CLASS_CAUSES[CLASS_NAMES[idx]],
         probabilities     = {CLASS_NAMES[i]: round(float(p), 4) for i, p in enumerate(probs)},
         inference_time_ms = ms,
     )
@@ -213,6 +243,7 @@ async def predict_batch(files: List[UploadFile] = File(...)):
                 confidence        = round(float(probs[idx]), 4),
                 confidence_pct    = f"{probs[idx]*100:.2f}%",
                 description       = CLASS_DESC[CLASS_NAMES[idx]],
+                penyebab          = CLASS_CAUSES[CLASS_NAMES[idx]],
                 probabilities     = {CLASS_NAMES[i]: round(float(p), 4) for i, p in enumerate(probs)},
                 inference_time_ms = ms,
             ))
